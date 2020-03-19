@@ -1,0 +1,69 @@
+Black or White 
+
+1 – Que fait le code : 
+
+Le code modifie le mode du document. A savoir mode dark ou mode light 
+le mode dark passe la page en noir avec l’écrire blanche 
+le mode light passe la page en blanc avec l’écriture noire 
+
+2- Quel est le but : 
+
+le but est de permettre a l’utilisateur de choisir quel mode il préfère pour lire 
+but expérience utilisateur
+
+3- Comment ça marche : 
+
+Une checkbox est crée dans le document HTML avec 
+
+<input id="toggler" type="checkbox">
+
+1 thème par défaut est crée dans le css grâce à :root qui cible la racine du document HTML 
+
+:root {
+--background-color: white;
+--text-color: black;
+/* to read: https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties */
+}
+
+1 data thème dark est crée afin d’y attribuer les propriété en mode dark 
+
+
+[data-theme="dark"] {
+--background-color: black;
+--text-color: white;
+}
+
+dans le javascript : 
+
+un fonction switchTheme est créée:c’est la fonction qui va si la case est cochée établir le dark thème et sinon le light thème 
+
+un condition est créée 
+
+si la checkbox est cochée on sélectionne la racine du document grâce a document.documentelement et on lui attribue un thème grâce a setattribute (nom de l’attribut ; valeur) la valeur de l’attribut est celle qui est stylisée dans le css 
+
+function switchTheme(event) {
+if (event.target.checked) {
+document.documentElement.setAttribute('data-theme', 'dark');
+}
+else {
+document.documentElement.setAttribute('data-theme', 'light');
+} 
+}
+
+on enregistre dans une constante l’élément a cibler à savoir l’id toggler et grâce au querySelector on sélectionne le premier élément dans le document correspondant au sélecteur 
+
+
+const toggler = document.querySelector('#toggler');
+
+
+on appelle la fonction sur l’élément toogler enregistré dans la constante on ajoute un addEventListener(type, listener , [options]);
+
+
+
+toggler.addEventListener('change', switchTheme, false);
+
+
+
+4 – Comment l’utiliser dans un projet : 
+
+Grâce a une case a cocher de la même manière – permet de donner une expérience différente à l’utilisateur 
