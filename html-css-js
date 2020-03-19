@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="blackorwhite.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello World!!!</h1>
+    
+    <input type="checkbox" name="toggler" id="toggler" value="1"><!--give some style to this checkbox, e.g. sun/moon image-->
+    <label for="toggler"> Enable dark mode</label>
+    
+    <script type="text/javascript" src="blackorwhite.js"></script>   
+</body>
+</html>
+
+
+:root {
+  --background-color: white;
+  --text-color: black;
+  /* to read: https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties */
+}
+
+[data-theme="dark"] {
+  /* to read: https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-* */
+  /* and https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors */
+  --background-color: black;
+  --text-color: white;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+label {
+  display:inline-block;
+  color:tomato
+}
+label:before {
+  content: '✗';
+  border:solid;
+  border-radius:3px;
+  padding: 0 0.15em;
+}
+input:checked + label{
+  color:turquoise;
+}
+input:checked + label:before {
+  content:'✓';
+}
+/* hide hecbox */
+[type="checkbox"] {
+  position:fixed;
+  left:-9999px;
+}
+
+function switchTheme(event) {
+    if (event.target.checked) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    }
+    else {
+        document.documentElement.setAttribute('data-theme', 'light');
+    }    
+}
+
+const toggler = document.querySelector('#toggler');
+toggler.addEventListener('change', switchTheme, false);
+
+
+
